@@ -67,10 +67,11 @@ export default function AnalyticsDashboard({ modules }: AnalyticsDashboardProps)
                   borderRadius: '8px',
                   color: tooltipText
                 }}
-                formatter={(value: number, name: string) => {
-                  if (name === 'completed') return [value, 'Completed'];
-                  if (name === 'total') return [value, 'Total'];
-                  return [value, name];
+                formatter={(value: number | undefined, name: string) => {
+                  const val = value ?? 0;
+                  if (name === 'completed') return [val, 'Completed'];
+                  if (name === 'total') return [val, 'Total'];
+                  return [val, name];
                 }}
               />
               <Legend wrapperStyle={{ color: textColor }} />
@@ -128,7 +129,7 @@ export default function AnalyticsDashboard({ modules }: AnalyticsDashboardProps)
                     year: 'numeric'
                   });
                 }}
-                formatter={(value: number) => [`${value} days`, 'Streak']}
+                formatter={(value: number | undefined) => [`${value ?? 0} days`, 'Streak']}
               />
               <Line 
                 type="monotone" 
@@ -182,7 +183,7 @@ export default function AnalyticsDashboard({ modules }: AnalyticsDashboardProps)
                   year: 'numeric'
                 });
               }}
-              formatter={(value: number) => [`${value} topics`, 'Completed']}
+              formatter={(value: number | undefined) => [`${value ?? 0} topics`, 'Completed']}
             />
             <Bar 
               dataKey="revisions" 

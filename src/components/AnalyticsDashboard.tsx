@@ -67,11 +67,12 @@ export default function AnalyticsDashboard({ modules }: AnalyticsDashboardProps)
                   borderRadius: '8px',
                   color: tooltipText
                 }}
-                formatter={(value: number | undefined, name: string) => {
+                formatter={(value: number | undefined, name: string | undefined) => {
                   const val = value ?? 0;
-                  if (name === 'completed') return [val, 'Completed'];
-                  if (name === 'total') return [val, 'Total'];
-                  return [val, name];
+                  const nameStr = name ?? '';
+                  if (nameStr === 'completed') return [val, 'Completed'];
+                  if (nameStr === 'total') return [val, 'Total'];
+                  return [val, nameStr];
                 }}
               />
               <Legend wrapperStyle={{ color: textColor }} />
